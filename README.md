@@ -3,7 +3,7 @@
 **SRN_H** is an algorythm that allows user form hashes from random string, picture, etc.
 
 The basis of the algorythm contains three diffirent hash-algorythms: MD5,
-SHA (128 bit implementation) and SRN algorythm (it is an encryption algorythm by itself,
+SHA (128/256 bit implementation) and SRN algorythm (it is an encryption algorythm by itself,
 but it's encryption version with *random* recursive functions is good to use).
 
 ### Idea
