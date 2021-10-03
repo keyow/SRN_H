@@ -104,9 +104,7 @@ namespace MD5_context {
 					AA = AA + (*functions[phase])(BB, CC, DD);
 					AA = AA + _32word_array[block_i * 16 + md5_array_indexes[phase * 16 + round]];
 					AA = AA + md5_constants[phase * 16 + round];
-					for (int s = 0; s < md5_shifts_indexes[phase * 16 + round]; s++) {
-						AA = (AA << 1) | (AA >> 31);
-					}
+					AA = (AA << md5_shifts_indexes[phase * 16 + round]) | (AA >> (32 - md5_shifts_indexes[phase * 16 + round]));
 					uint32_t tmp = AA;
 					AA = DD;
 					DD = CC;
@@ -120,15 +118,16 @@ namespace MD5_context {
 			result[2] += CC;
 			result[3] += DD;
 		}
+	}
+
+	void Reset() {
 		_32word_array.clear();
-		AA = 0x67452301;
-		BB = 0xefcdab89;
-		CC = 0x98badcfe;
-		DD = 0x10325476;
+		AA = 0x67452301; result[0] = AA;
+		BB = 0xefcdab89; result[1] = BB;
+		CC = 0x98badcfe; result[2] = CC;
+		DD = 0x10325476; result[3] = DD;
 	}
 }
-
-
 
 void MD5_starter(string line) {
 	MD5_context::LoadString(line);
@@ -142,4 +141,6 @@ void MD5_starter(string line) {
 	cout << setfill('0') << setw(8) << MD5_context::result[2];
 	cout << setfill('0') << setw(8) << MD5_context::result[3];
 	cout << endl;
+
+	MD5_context::Reset();
 }
