@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <array>
 #include <vector>
 #include <cstdint>
@@ -121,6 +120,11 @@ namespace MD5_context {
 			result[2] += CC;
 			result[3] += DD;
 		}
+		_32word_array.clear();
+		AA = 0x67452301;
+		BB = 0xefcdab89;
+		CC = 0x98badcfe;
+		DD = 0x10325476;
 	}
 }
 
